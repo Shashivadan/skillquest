@@ -6,6 +6,7 @@ import {
   useJsApiLoader,
   Autocomplete,
   DirectionsRenderer,
+  Marker,
 } from "@react-google-maps/api";
 import type { Libraries } from "@react-google-maps/api";
 import { env } from "~/env";
@@ -232,6 +233,7 @@ export default function Page() {
             <div className="flex items-center gap-2">
               <MapPin className="text-muted-foreground h-4 w-4" />
               <Autocomplete
+                className="w-full"
                 onLoad={(auto) => setOrigin(auto)}
                 onPlaceChanged={onOriginChanged}
               >
@@ -249,6 +251,7 @@ export default function Page() {
             <div className="flex items-center gap-2">
               <Navigation className="text-muted-foreground h-4 w-4" />
               <Autocomplete
+                className="w-full"
                 onLoad={(auto) => setDestination(auto)}
                 onPlaceChanged={onDestinationChanged}
               >
@@ -286,6 +289,12 @@ export default function Page() {
             }}
           >
             {directions && <DirectionsRenderer directions={directions} />}
+            <Marker
+              position={center}
+              label={"A"}
+              animation={google.maps.Animation.DROP}
+              draggable
+            />
           </GoogleMap>
         </Card>
 
